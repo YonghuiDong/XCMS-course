@@ -318,7 +318,6 @@ A 2D plot is a reasonable way to look at this.
 Peak picking - ppm
 ========================================================
 
-
 <br>
 <div align="center">
 <img src="_images/trp_frag_2D.png" height=1300px>
@@ -593,7 +592,7 @@ max = 20
 If you are processing GC data remember that many fragments will be isomers. So set this high.
                
                 
-Grouping and retention time correction - retcor
+Grouping and retention time correction
 ========================================================
 id: retcor
 
@@ -601,18 +600,116 @@ id: retcor
 ```{r, echo= -1, cache=TRUE, fig.width = 20, fig.height = 8, fig.align = "center", dpi=300}
 par(cex.axis=1.5, cex.lab=1.5, lwd=3)
 
-xset_g_r <- retcor(xset_g, 
+xset_g_r <- retcor(xset_g,
+                   #method="loess", # -> loess or linear. Currently a bug if explicit
                    missing = 3, 
                    extra = 3, 
-                   smooth = "loess", 
+                   smooth = "loess", # actually selects loess
                    span = 0.6, 
-                   family = "gaussian", 
                    plottype = "mdevden",
                    col=xset_g@phenoData[,"class"]
                   )
 
 ```
 
+
+
+Grouping and retention time correction - span
+========================================================
+
+<br>
+
+**span:** degree of smoothing for local polynomial regression fitting.<br>
+The higher the less flexible the fitting is.<br>
+0 == overfitting<br>
+1 == only captures very overall trends<br>
+<br>
+0.4-0.7 is typical in my opinion. 0.2 is default.
+<br>
+<br>
+
+We set:
+<br>
+
+```{r, eval=FALSE}
+span = 0.6
+```
+
+
+
+Grouping and retention time correction - span
+========================================================
+
+<div style = "height: 650px">
+Span: 0.01<br>
+<img src="_images/span0-01.png">
+</div>
+
+<br>
+
+<div style = "height: 650px">
+Span: 0.2<br>
+<img src="_images/span0-2.png">
+</div>
+
+***
+
+<div style = "height: 650px">
+Span: 0.6<br>
+<img src="_images/span0-6.png">
+</div>
+
+<br>
+
+<div style = "height: 650px">
+Span: 1<br>
+<img src="_images/span1.png">
+</div>
+
+
+
+Grouping and retention time correction - missing & extra
+========================================================
+
+
+<br>
+
+```{r, eval=FALSE}
+missing = 3
+extra = 3
+```
+
+<br>
+
+**missing:** number of missing samples to allow in retention time correction groups<br><br>
+**extra:** number of extra peaks to allow in retention time correction correction groups
+
+
+
+
+Grouping and retention time correction - plotting
+========================================================
+
+<br>
+
+```{r, eval=FALSE}
+plottype = "mdevden",
+col=xset_g@phenoData[,"class"]
+```               
+
+<br>
+
+**plottype:**
+
+* "deviation": Plots only the RT deviations
+* "mdevden": As "deviation" but adds density plot below
+
+<br><br>
+
+**col:** We can tell it how to color the points/lines in the deviations plot.
+
+* Can be a factor, numeric or a character vector of colors.
+* Useful to color by batch.
 
 
 Grouping and retention time correction - grouping one more time
@@ -641,7 +738,7 @@ Grouping and retention time correction - Some more thoughts
 ========================================================
 
 
-- More  features are not always good
+- More features are not always good
 - minsamp/minfrac is per group and critical. phenoData
 
 - retcor
