@@ -601,10 +601,10 @@ id: retcor
 par(cex.axis=1.5, cex.lab=1.5, lwd=3)
 
 xset_g_r <- retcor(xset_g,
-                   #method="loess", # -> loess or linear. Currently a bug if explicit
+                   method="peakgroups",
                    missing = 3, 
                    extra = 3, 
-                   smooth = "loess", # actually selects loess
+                   smooth = "loess",
                    span = 0.6, 
                    plottype = "mdevden",
                    col=xset_g@phenoData[,"class"]
@@ -720,7 +720,7 @@ Now we do grouping again with the corrected retention times.<br>
 Notice that we give more strict `bw`, `minfrac` and `minsamp` since we expect better matching now that we have corrected the retention times.
 
 ```{r, cache=TRUE, message = FALSE}
-xset_g_r_g <- group(xset_g_r, 
+xset_g_r_g <- group(xset_g_r,
                     bw = 5, 
                     minfrac = 0.75, 
                     minsamp = 7, 
@@ -733,15 +733,26 @@ xset_g_r_g
 ```
 
 
+Filling missing values
+========================================================
+type: sub-section
 
-Filling missing values (fillPeaks)
+<br>
+
+Is there really nothing here?
+
+
+Filling missing values - fillPeaks
 ========================================================
 
-* Importance of profparam previously set
-* Problem of very accurate data
-  * ppm in new version. minimum mz width
-* TODO: show density plot of mzmax-mzmin
+<br>
 
+* Peaks that were not originally found in some samples are problematic for statistics
+* Therefore we re-examine each file again and check the area where peaks were found in other files
+* We then integrate (blindly) the area we expect to find a peak
+* The integration is done with the slice-size we set with the `profparam` parameter in `xcmsSet`
+
+<br><br>
 
 ```{r, cache=TRUE, message = FALSE}
 xet_gr_g_fill <- fillPeaks(xset_g_r_g, 
@@ -750,6 +761,47 @@ xet_gr_g_fill <- fillPeaks(xset_g_r_g,
                            BPPARAM = SerialParam()
                           )
 ```
+
+
+
+Filling missing values - fillPeaks
+========================================================
+incremental: true
+
+
+<br>
+Here are some issues to be aware of
+
+* The *m/z* and rt ranges that is integrated is based on previously found peaks.<br>This creates some issues:
+  * For very accurate data the range of the original peaks can have more or less zero width. This is unrealistic for re-ingration and peaks can be underestimated
+  * We could get around this by using larger `profparam`. But with this we risk *too large* ranges
+  
+<br>
+In the next major iteration XCMS (XCMS v3 under development by Johannes Rainer) has fixed this by introducing a minimum *m/z* width for the re-integration as well as using the raw data instead of the profile matrix.
+
+
+<br>
+For now we only have:
+```{r, eval=FALSE}
+expand.mz=1.5,
+expand.rt=1.1
+```
+
+which can expand the found range. But not set a minimum.
+
+
+***
+
+<br>
+We can see the issue here:
+```{r, fig.height=6, fig.width=9, fig.align='center', dpi=200}
+peaks <- peakTable(xet_gr_g_fill)
+hist(peaks$mzmax-peaks$mzmin, 100, xlab = "Da", main="Histogram of m/z deviation between matched peaks")
+```
+
+<br>
+We see that the max matches the `mzwid` we set in `group`.
+
 
 
 
@@ -774,17 +826,6 @@ TODO: What the columns mean
 TODO: npeaks means...
 
 
-
-What is the output of XCMS really? - fillPeaks revisited
-========================================================
-
-<br>
-
-```{r, fig.height=6, fig.width=9, fig.align='center', dpi=200}
-hist(peaks$mzmax-peaks$mzmin, 100, xlab = "Da", main="Histogram of m/z deviation between matched peaks")
-```
-
-We see that the max matched the `mzwid` we set in `group`.
 
 
 
