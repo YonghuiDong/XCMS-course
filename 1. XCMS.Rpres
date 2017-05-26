@@ -755,11 +755,11 @@ Filling missing values - fillPeaks
 <br><br>
 
 ```{r, cache=TRUE, message = FALSE}
-xet_gr_g_fill <- fillPeaks(xset_g_r_g, 
-                           expand.mz=1.5,
-                           expand.rt=1.1, 
-                           BPPARAM = SerialParam()
-                          )
+xset_g_r_g_fill <- fillPeaks(xset_g_r_g, 
+                             expand.mz=1.5,
+                             expand.rt=1.1, 
+                             BPPARAM = SerialParam()
+                            )
 ```
 
 
@@ -795,7 +795,7 @@ which can expand the found range. But not set a minimum.
 <br>
 We can see the issue here:
 ```{r, fig.height=6, fig.width=9, fig.align='center', dpi=200}
-peaks <- peakTable(xet_gr_g_fill)
+peaks <- peakTable(xset_g_r_g_fill)
 hist(peaks$mzmax-peaks$mzmin, 100, xlab = "Da", main="Histogram of m/z deviation between matched peaks")
 ```
 
@@ -811,21 +811,22 @@ What is the output of XCMS really?
 <br>
 
 ```{r, cache=TRUE, message = FALSE}
-peaks <- peakTable(xet_gr_g_fill)
+peaks <- peakTable(xset_g_r_g_fill)
 ```
 
 <br>
 
-```{r, results="asis"}
+```{r}
 kable(peaks[1:5,])
 ```
 
 <br>
 
-TODO: What the columns mean
-TODO: npeaks means...
+**npeaks:** Number of peaks assigned to the group. Can be higher than the number of samples if several original peaks (from peak-picking) were combined.
 
+**A, B, C... (As the groups, or the folders you used, were named):** Number of samples where the feature was found (in original peak-picking). Each file only counted one time.
 
+**Other columns:** The intensities/areas in each file.
 
 
 
