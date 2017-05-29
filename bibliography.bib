@@ -38,6 +38,7 @@ volume = {78},
 year = {2006}
 }
 
+
 @article{Conley2014,
 abstract = {MOTIVATION: Isotope trace (IT) detection is a fundamental step for liquid or gas chromatography mass spectrometry (XC-MS) data analysis that faces a multitude of technical challenges on complex samples. The Kalman filter (KF) application to IT detection addresses some of these challenges; it discriminates closely eluting ITs in the m/z dimension, flexibly handles heteroscedastic m/z variances and does not bin the m/z axis. Yet, the behavior of this KF application has not been fully characterized, as no cost-free open-source implementation exists and incomplete evaluation standards for IT detection persist. RESULTS: Massifquant is an open-source solution for KF IT detection that has been subjected to novel and rigorous methods of performance evaluation. The presented evaluation with accompanying annotations and optimization guide sets a new standard for comparative IT detection. Compared with centWave, matchedFilter and MZMine2-alternative IT detection engines-Massifquant detected more true ITs in a real LC-MS complex sample, especially low-intensity ITs. It also offers competitive specificity and equally effective quantitation accuracy. Availability and implementation: Massifquant is integrated into XCMS with GPL license ≥ 2.0 and hosted by Bioconductor: http://bioconductor.org. Annotation data are archived at http://hdl.lib.byu.edu/1877/3232. Parameter optimization code and documentation is hosted at https://github.com/topherconley/optimize-it. CONTACT: cjconley@ucdavis.edu or jtprince@chem.byu.edu Supplementary information: Supplementary data are available at Bioinformatics online.},
 author = {Conley, Christopher J. and Smith, Rob and Torgrip, Ralf J O and Taylor, Ryan M. and Tautenhahn, Ralf and Prince, John T.},
@@ -51,5 +52,121 @@ pmid = {24872423},
 title = {{Massifquant: Open-source Kalman filter-based XC-MS isotope trace feature detection}},
 url = {http://www.ncbi.nlm.nih.gov/pubmed/24872423},
 volume = {30},
+year = {2014}
+}
+
+
+@misc{Mahieu2016,
+abstract = {Global profiling of metabolites in biological samples by liquid chromatography/mass spectrometry results in datasets too large to evaluate manually. Fortunately, a variety of software programs are now available to automate the data analysis. Selection of the appropriate processing solution is dependent upon experimental design. Most metabolomic studies a decade ago had a relatively simple experimental design in which the intensities of compounds were compared between only two sample groups. More recently, however, increasingly sophisticated applications have been pursued. Examples include comparing compound intensities between multiple sample groups and unbiasedly tracking the fate of specific isotopic labels. The latter types of applications have necessitated the development of new software programs, which have introduced additional functionalities that facilitate data analysis. The objective of this review is to provide an overview of the freely available bioinformatic solutions that are either based upon or are compatible with the algorithms in XCMS, which we broadly refer to here as the 'XCMS family' of software. These include CAMERA, credentialing, Warpgroup, metaXCMS, X13CMS, and XCMS Online. Together, these informatic technologies can accommodate most cutting-edge metabolomic applications and offer unique advantages when compared to the original XCMS program.},
+author = {Mahieu, Nathaniel G. and Genenbacher, Jessica Lloyd and Patti, Gary J.},
+booktitle = {Current Opinion in Chemical Biology},
+doi = {10.1016/j.cbpa.2015.11.009},
+file = {:C$\backslash$:/Users/JPZS/Downloads/1-s2.0-S1367593115001374-main.pdf:pdf},
+isbn = {1879-0402 (Electronic)
+1367-5931 (Linking)},
+issn = {18790402},
+mendeley-groups = {{\_}to read},
+pages = {87--93},
+pmid = {26673825},
+title = {{A roadmap for the XCMS family of software solutions in metabolomics}},
+url = {http://www.sciencedirect.com.ep.fjernadgang.kb.dk/science/article/pii/S1367593115001374},
+volume = {30},
+year = {2016}
+}
+
+
+@article{Libiseller2015,
+author = {Libiseller, Gunnar and Dvorzak, Michaela and Kleb, Ulrike and Gander, Edgar and Eisenberg, Tobias and Madeo, Frank and Neumann, Steffen and Trausinger, Gert and Sinner, Frank and Pieber, Thomas and Magnes, Christoph},
+doi = {10.1186/s12859-015-0562-8},
+file = {:C$\backslash$:/Users/JPZS/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Libiseller et al. - 2015 - IPO a tool for automated optimization of XCMS parameters.pdf:pdf},
+isbn = {1285901505628},
+issn = {1471-2105},
+journal = {BMC Bioinformatics},
+keywords = {design of experiments,isotopologue,metabolomics,parameter optimization,xcms},
+mendeley-groups = {{\_}to read},
+number = {1},
+pages = {1--10},
+title = {{IPO: a tool for automated optimization of XCMS parameters}},
+url = {http://www.biomedcentral.com/1471-2105/16/118},
+volume = {16},
+year = {2015}
+}
+
+
+@article{Kuhl2012,
+abstract = {Liquid chromatography coupled to mass spectrometry is routinely used for metabolomics experiments. In contrast to the fairly routine and automated data acquisition steps, subsequent compound annotation and identification require extensive manual analysis and thus form a major bottleneck in data interpretation. Here we present CAMERA, a Bioconductor package integrating algorithms to extract compound spectra, annotate isotope and adduct peaks, and propose the accurate compound mass even in highly complex data. To evaluate the algorithms, we compared the annotation of CAMERA against a manually defined annotation for a mixture of known compounds spiked into a complex matrix at different concentrations. CAMERA successfully extracted accurate masses for 89.7{\%} and 90.3{\%} of the annotatable compounds in positive and negative ion modes, respectively. Furthermore, we present a novel annotation approach that combines spectral information of data acquired in opposite ion modes to further improve the annotation rate. We demonstrate the utility of CAMERA in two different, easily adoptable plant metabolomics experiments, where the application of CAMERA drastically reduced the amount of manual analysis.},
+arxivId = {NIHMS150003},
+author = {Kuhl, Carsten and Tautenhahn, Ralf and Böttcher, Christoph and Larson, Tony R. and Neumann, Steffen},
+doi = {10.1021/ac202450g},
+eprint = {NIHMS150003},
+file = {:C$\backslash$:/Users/JPZS/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Kuhl et al. - 2012 - CAMERA An integrated strategy for compound spectra extraction and annotation of liquid chromatographymass spectrome.pdf:pdf;:C$\backslash$:/Users/JPZS/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Kuhl et al. - 2012 - CAMERA An integrated strategy for compound spectra extraction and annotation of liquid chromatographymass spectr(2).pdf:pdf;:C$\backslash$:/Users/JPZS/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Kuhl et al. - 2012 - CAMERA An integrated strategy for compound spectra extraction and annotation of liquid chromatographymass spectrom.html:html;:C$\backslash$:/Users/JPZS/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Kuhl et al. - 2012 - CAMERA An integrated strategy for compound spectra extraction and annotation of liquid chromatographymass spect(2).html:html},
+isbn = {0003-2700},
+issn = {00032700},
+journal = {Analytical Chemistry},
+keywords = {Algorithms,Chromatography- Liquid,Plants,Spectrometry- Mass- Electrospray Ionization},
+mendeley-groups = {Zotero - Zotero Library},
+mendeley-tags = {Algorithms,Chromatography- Liquid,Plants,Spectrometry- Mass- Electrospray Ionization},
+month = {jan},
+number = {1},
+pages = {283--289},
+pmid = {22111785},
+shorttitle = {CAMERA},
+title = {{CAMERA: An integrated strategy for compound spectra extraction and annotation of liquid chromatography/mass spectrometry data sets}},
+url = {http://dx.doi.org/10.1021/ac202450g http://pubs.acs.org/doi/abs/10.1021/ac202450g http://pubs.acs.org/doi/full/10.1021/ac202450g http://pubs.acs.org/doi/pdf/10.1021/ac202450g},
+volume = {84},
+year = {2012}
+}
+
+
+@article{Huang2014,
+author = {Huang, Xiaojing and Chen, Ying-Jr and Cho, Kevin and Nikolskiy, Igor and Crawford, Peter A. and Patti, Gary J.},
+title = {X13CMS: Global Tracking of Isotopic Labels in Untargeted Metabolomics},
+journal = {Analytical Chemistry},
+volume = {86},
+number = {3},
+pages = {1632-1639},
+year = {2014},
+doi = {10.1021/ac403384n},
+note = {PMID: 24397582},
+URL = {http://dx.doi.org/10.1021/ac403384n},
+eprint = {http://dx.doi.org/10.1021/ac403384n}
+}
+
+
+@article{Tautenhahn2011,
+abstract = {Mass spectrometry-based untargeted metabolomics often results in the observation of hundreds to thousands of features that are differentially regulated between sample classes. A major challenge in interpreting the data is distinguishing metabolites that are causally associated with the phenotype of interest from those that are unrelated but altered in downstream pathways as an effect. To facilitate this distinction, here we describe new software called metaXCMS for performing second-order ("meta") analysis of untargeted metabolomics data from multiple sample groups representing different models of the same phenotype. While the original version of XCMS was designed for the direct comparison of two sample groups, metaXCMS enables meta-analysis of an unlimited number of sample classes to facilitate prioritization of the data and increase the probability of identifying metabolites causally related to the phenotype of interest. metaXCMS is used to import XCMS results that are subsequently filtered, realigned, and ultimately compared to identify shared metabolites that are up- or down-regulated across all sample groups. We demonstrate the software's utility by identifying histamine as a metabolite that is commonly altered in three different models of pain. metaXCMS is freely available at http://metlin.scripps.edu/metaxcms/.},
+author = {Tautenhahn, Ralf and Patti, Gary J. and Kalisiak, Ewa and Miyamoto, Takashi and Schmidt, Manuela and Lo, Fang Yin and McBee, Joshua and Baliga, Nitin S. and Siuzdak, Gary},
+doi = {10.1021/ac102980g},
+file = {:C$\backslash$:/Users/JPZS/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Tautenhahn et al. - 2011 - MetaXCMS Second-order analysis of untargeted metabolomics data.pdf:pdf;:C$\backslash$:/Users/JPZS/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Tautenhahn et al. - 2011 - MetaXCMS Second-order analysis of untargeted metabolomics data.html:html},
+isbn = {1520-6882 (Electronic)$\backslash$n0003-2700 (Linking)},
+issn = {00032700},
+journal = {Analytical Chemistry},
+mendeley-groups = {Zotero - Zotero Library,{\_}software/R},
+month = {feb},
+number = {3},
+pages = {696--700},
+pmid = {21174458},
+shorttitle = {metaXCMS},
+title = {{MetaXCMS: Second-order analysis of untargeted metabolomics data}},
+url = {http://dx.doi.org/10.1021/ac102980g http://pubs.acs.org.ep.fjernadgang.kb.dk/doi/full/10.1021/ac102980g http://pubs.acs.org.ep.fjernadgang.kb.dk/doi/pdf/10.1021/ac102980g},
+volume = {83},
+year = {2011}
+}
+
+
+@article{Gowda2014,
+abstract = {XCMS Online ( xcmsonline.scripps.edu ) is a cloud-based informatic platform designed to process and visualize mass-spectrometry-based, untargeted metabolomic data. Initially, the platform was developed for two-group comparisons to match the independent, "control" versus "disease" experimental design. Here, we introduce an enhanced XCMS Online interface that enables users to perform dependent (paired) two-group comparisons, meta-analysis, and multigroup comparisons, with comprehensive statistical output and interactive visualization tools. Newly incorporated statistical tests cover a wide array of univariate analyses. Multigroup comparison allows for the identification of differentially expressed metabolite features across multiple classes of data while higher order meta-analysis facilitates the identification of shared metabolic patterns across multiple two-group comparisons. Given the complexity of these data sets, we have developed an interactive platform where users can monitor the statistical output of univariate (cloud plots) and multivariate (PCA plots) data analysis in real time by adjusting the threshold and range of various parameters. On the interactive cloud plot, metabolite features can be filtered out by their significance level (p-value), fold change, mass-to-charge ratio, retention time, and intensity. The variation pattern of each feature can be visualized on both extracted-ion chromatograms and box plots. The interactive principal component analysis includes scores, loadings, and scree plots that can be adjusted depending on scaling criteria. The utility of XCMS functionalities is demonstrated through the metabolomic analysis of bacterial stress response and the comparison of lymphoblastic leukemia cell lines.},
+author = {Gowda, Harsha and Ivanisevic, Julijana and Johnson, Caroline H. and Kurczy, Michael E. and Benton, H. Paul and Rinehart, Duane and Nguyen, Thomas and Ray, Jayashree and Kuehl, Jennifer and Arevalo, Bernardo and Westenskow, Peter D. and Wang, Junhua and Arkin, Adam P. and Deutschbauer, Adam M. and Patti, Gary J. and Siuzdak, Gary},
+doi = {10.1021/ac500734c},
+file = {:C$\backslash$:/Users/JPZS/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Gowda et al. - 2014 - Interactive XCMS online Simplifying advanced metabolomic data processing and subsequent statistical analyses.pdf:pdf},
+isbn = {0003-2700},
+issn = {15206882},
+journal = {Analytical Chemistry},
+mendeley-groups = {{\_}to read},
+number = {14},
+pages = {6931--6939},
+pmid = {24934772},
+title = {{Interactive XCMS online: Simplifying advanced metabolomic data processing and subsequent statistical analyses}},
+volume = {86},
 year = {2014}
 }

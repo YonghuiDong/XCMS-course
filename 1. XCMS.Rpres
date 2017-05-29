@@ -15,7 +15,9 @@ width: 2540
 height: 1429
 
 ```{r, echo = FALSE}
+library(knitr)
 library(knitcitations)
+
 cite_options(     
                   cite.style = "numeric"
             )
@@ -29,16 +31,18 @@ type: sub-section
 
 <div style="font-size: 1.3em; text-align: center;line-height: 150%; padding-top:100px">
 <br>
-<br>
 <ol type="1">
 <li><a href="#/why">What does the data look like?<br>Why pre-processing?</a></li>
 <li><a href="#/peakpick">Peak picking</a></li>
 <li><a href="#/group">Grouping</a> peaks</li>
 <li><a href="#/retcor">Retention time correction</a></li>
-<li><a href="#/fillPeaks">Filling</a> missing values</li>
-<li>Checking the results</li>
+<li><a href="#/fillPeaks">Filling</a> missing values<br><br></li>
+<li><a href="#/output">What is the output of XCMS really?</a></li>
+<li><a href="#/check">Checking the results</a></li>
+<li><a href="#/stats">Getting quick stats</a></li>
 </ol>
 </div>
+
 
 
 
@@ -67,6 +71,7 @@ This is what XCMS does:
 
 <br>
 Simply to do. Difficult to do well. Impossible to do perfectly.
+
 
 
 Peak picking
@@ -131,13 +136,15 @@ xset <- xcmsSet(files,
                 ppm = 30,
                 snthr = 1E2,
                 profparam = list(step=0.005),
-                peakwidth = c(0.05*60,0.20*60)
+                peakwidth = c(0.05*60,0.20*60),
+                verbose.columns	= TRUE,
+                fitgauss = TRUE
                 )
 ```
 
 
 
-Peak  - BPPARAM
+Peak picking - BPPARAM
 ========================================================
 
 <br>
@@ -255,8 +262,6 @@ plotEIC(xraw, mzrange=c(0, 2000), , rtrange=c(0,  12*60))
 
 
 
-
-
 Peak picking - Peak width
 ========================================================
 
@@ -371,7 +376,7 @@ First we need to clear up the confusion about the difference between *profile mo
 **Profile mode:** The data is continuous in the *m/z* dimension.<br>
 As opposed to centroid mode data where you have discrete (sticks) in the *m/z* dimension.
 
-**Profile matrix:** A rt (or scan rather) × *m/z* matrix of *m/z* slices.<br>
+**Profile matrix:** A rt (or scan rather) x *m/z* matrix of *m/z* slices.<br>
 XCMS uses this for some procedures (fillPeaks, but not peakpicking) instead of the full raw data. Think of it as binned data with less *m/z* resolution.
 
 <br>
@@ -384,8 +389,6 @@ XCMS uses this for some procedures (fillPeaks, but not peakpicking) instead of t
 ```{r, eval=FALSE}
 profparam = list(step=0.005)
 ```
-
-
 
 
 
@@ -571,7 +574,6 @@ mzwid = 0.01
          
 How close the m/z need to be the same compound.
 
-  
 
  
 Grouping and retention time correction - max
@@ -590,6 +592,7 @@ max = 20
 
 <br>
 If you are processing GC data remember that many fragments will be isomers. So set this high.
+
                
                 
 Grouping and retention time correction
@@ -671,7 +674,6 @@ Span: 1<br>
 Grouping and retention time correction - missing & extra
 ========================================================
 
-
 <br>
 
 ```{r, eval=FALSE}
@@ -683,7 +685,6 @@ extra = 3
 
 **missing:** number of missing samples to allow in retention time correction groups<br><br>
 **extra:** number of extra peaks to allow in retention time correction correction groups
-
 
 
 
@@ -735,11 +736,13 @@ xset_g_r_g
 
 Filling missing values
 ========================================================
+id: fillPeaks
 type: sub-section
 
 <br>
 
 Is there really nothing here?
+
 
 
 Filling missing values - fillPeaks
@@ -767,7 +770,6 @@ xset_g_r_g_fill <- fillPeaks(xset_g_r_g,
 Filling missing values - fillPeaks
 ========================================================
 incremental: true
-
 
 <br>
 Here are some issues to be aware of
@@ -804,39 +806,180 @@ We see that the max matches the `mzwid` we set in `group`.
 
 
 
-
-What is the output of XCMS really?
+What is the output of XCMS really? - Aligned peaks
 ========================================================
+id: output
 
 <br>
 
+There are two types of peak tables in XCMS.<br>
+First we look at the aligned table that is what you normally want.
+<br>
+<br>
+
+
 ```{r, cache=TRUE, message = FALSE}
-peaks <- peakTable(xset_g_r_g_fill)
+peaks_aligned <- peakTable(xset_g_r_g_fill)
 ```
 
 <br>
 
 ```{r}
-kable(peaks[1:5,])
+kable(peaks_aligned[1:5,])
 ```
 
 <br>
 
-**npeaks:** Number of peaks assigned to the group. Can be higher than the number of samples if several original peaks (from peak-picking) were combined.
+* **npeaks:** Number of peaks assigned to the group.
+<br>&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;Can be higher than the number of samples if several original peaks (from peak-picking) were combined.
+<br>&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;If this is a lot *higher* than the number of samples something is probably wrong.
+<br>&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;If this is a lot *lower* than the number of samples something is probably wrong.
+* **A, B, C... (As the groups, or the folders you used, were named):** Number of samples where the feature was found (in original peak-picking).
+<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Each file only counted one time.
+* **Other columns:** The intensities/areas in each file.
 
-**A, B, C... (As the groups, or the folders you used, were named):** Number of samples where the feature was found (in original peak-picking). Each file only counted one time.
 
-**Other columns:** The intensities/areas in each file.
+
+What is the output of XCMS really? - Raw detected peaks
+========================================================
+
+<br>
+
+The other kind of table if the raw peaks as they were detected in each peak.<br>
+That includes all peaks that didn't survive the grouping step.
+
+
+
+You would usually use this to check if a peak was actually found but removed by grouping.<br>
+Also contains extra information info for each peak.
+<br>
+<br>
+
+
+```{r, cache=TRUE, message = FALSE}
+peaks <- peaks(xset_g_r_g_fill)
+```
+
+<br>
+
+<font style="font-size: 0.9em;"> 
+```{r}
+kable(peaks[1:5,])
+```
+</font> 
+
+<br>The **sample** columns says which sample the peak was found in. Same order as your original input and `xset_g_r_g_fill@filepaths`.
+
+
+
+Checking the results - Isomeric separation
+========================================================
+id: check
+
+Check if the individually found peaks (dots) are separated in groups (rectangles) properly.<br>
+The big red dot just marks the spot to asked about.
+<br>
+
+```{r, fig.height=12, fig.width=16}
+par(cex = 2.5)
+library(scales)
+devtools::source_url("https://raw.githubusercontent.com/stanstrup/chemhelper/master/R/xcms_helpers.R")
+
+analyze.xcms.group(xset_g_r_g_fill,
+                   mz = 121.03636,
+                   rt = 5.7*60,
+                   rt_tol_sample=60,
+                   mz_tol_sample=0.01,
+                   rt_tol_group=30,
+                   mz_tol_group=0.05)
+```
+
+
+
+Checking the results - Isomeric separation
+========================================================
+
+<br><br>
+
+**Troubleshooting**
+
+<font style="font-size: 1.5em;"> 
+
+| **Problem**                          | **Solution**                                                |
+|--------------------------------------|-------------------------------------------------------------|
+| Peaks not separated in RT dimension  | Lower bw in the grouping step                               |
+| Peaks split in RT dimension          | Increase bw in the grouping step and/or better alignment    |
+| Peaks not separated in m/z dimension | Lower mzwid in the grouping step                            |
+| Peaks split in m/z dimension         | Increase mzwid in the grouping step and/or better alignment |
+| Peaks missing                        | Check raw peaklist and revise peak-picking                  |
+| Peak found but not assigned to group | Compare raw peaklist to minfrac & minsamp parameters for group |
+
+</font> 
 
 
 
 Checking the results
 ========================================================
-* Are isomers separated?
+
 * Do you find peaks you know should be there?
 * is peak picking or grouping the problem?
 * bw or mzwid adjustment needed?
 * More features are not always good. Could mean you are splitting features that are really the same
+
+
+
+Getting quick stats
+========================================================
+id: stats
+
+```{r, cache=TRUE, message = FALSE}
+stats <- diffreport(xset_g_r_g_fill, class1="A", class2="B")
+
+kable(stats[1:10,c("name", "fold", "tstat", "pvalue", "mzmed", "rtmed", "npeaks", "A", "B", "C")])
+```
+
+***
+
+<div class="fragment" align="center">
+<img src="_images/super_sig_feature.png" height=1100px><br>
+</div>
+
+
+
+XCMS based packages
+========================================================
+
+<br>
+<br>
+
+There are many packages that add additional features to XCMS.<br>
+Here are some examples:
+
+* CAMERA `r citep(bib[["Kuhl2012"]])`: Grouping of features and annotation (next talk!)
+* X<sup>13</sup>CMS `r citep(bib[["Huang2014"]])`: Unbiased mapping of isotopic fates
+* XCMS Online `r citep(bib[["Gowda2014"]])`: Online and interactive use of XCMS
+* metaXCMS `r citep(bib[["Tautenhahn2011"]])`: Finding shared alterations among multiple sample classes
+* IPO  `r citep(bib[["Libiseller2015"]])`: Automatic optimization of XCMS parameters
+* more exist... See `r citep(bib[["Mahieu2016"]])`
+
+
+The End
+========================================================
+type: section
+class: centerpage
+
+<br>
+<br>
+<br>
+
+<font style="font-size: 1.5em;"> 
+
+Thank you for your attention
+
+Questions?
+
+</font> 
+
 
 
 Bibliography
