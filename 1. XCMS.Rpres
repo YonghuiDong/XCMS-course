@@ -3,16 +3,24 @@
 margin: auto !important;
 width: 1200px;
 }
+
+.reveal h1 {
+text-align: center;
+font-weight: bold;
+font-size: 6em;
+padding-top: 1em;
+}
 </style>
 
 
-XCMS course 2017
+XCMS workshop 2017
 ========================================================
-author: 
-date: 
+author:
+date:
 autosize: true
 width: 2540
 height: 1429
+
 
 ```{r, echo = FALSE}
 library(knitr)
@@ -23,6 +31,13 @@ cite_options(
             )
 bib <- read.bibtex("bibliography.bib")
 ```
+
+
+<div style="font-size: 1.3em; color: white; text-align: center;padding-top: 10em;">
+<p style="font-size: 1.5em;">Jan Stanstrup</p>
+2017/06/25<br><br>
+Steno Diabetes Center Copenhagen, Denmark
+</div>
 
 
 Outline
@@ -37,8 +52,7 @@ type: sub-section
 <li><a href="#/group">Grouping</a> peaks</li>
 <li><a href="#/retcor">Retention time correction</a></li>
 <li><a href="#/fillPeaks">Filling</a> missing values<br><br></li>
-<li><a href="#/output">What is the output of XCMS really?</a></li>
-<li><a href="#/check">Checking the results</a></li>
+<li><a href="#/check">Checking the results and troubleshooting</a></li>
 <li><a href="#/stats">Getting quick stats</a></li>
 </ol>
 </div>
@@ -805,14 +819,49 @@ hist(peaks$mzmax-peaks$mzmin, 100, xlab = "Da", main="Histogram of m/z deviation
 We see that the max matches the `mzwid` we set in `group`.
 
 
-
-What is the output of XCMS really? - Aligned peaks
+Checking the results and troubleshooting
 ========================================================
-id: output
+id: check
+type: sub-section
+
+<br>
+<br>
+How do I look at the results and how do I know if they are good?
+
+
+
+Checking the results and troubleshooting - Know your friends
+========================================================
+
+<font style="font-size: 1.2em;"> 
+
+<br><br>
+
+* Check if compounds you know behave as they should
+   * Are they found including adducts and fragments?
+   * Are they found consistently in most samples?
+   * Are known isomers separated?
+   * Are compounds split in multiple groups?
+* More features are not always good. Could mean you are splitting features that are really the same or picking a lot of noise.
 
 <br>
 
-There are two types of peak tables in XCMS.<br>
+So to check these you need a handful of:
+
+* close eluting isomers
+* compounds that have lots of fragments adducts (it makes good sense to wait to check these until after you have used CAMERA)
+
+</font>
+
+
+
+Checking the results and troubleshooting - Aligned peaks
+========================================================
+
+
+<br>
+
+There are two types of peak-tables in XCMS.<br>
 First we look at the aligned table that is what you normally want.
 <br>
 <br>
@@ -840,7 +889,7 @@ kable(peaks_aligned[1:5,])
 
 
 
-What is the output of XCMS really? - Raw detected peaks
+Checking the results and troubleshooting - Raw detected peaks
 ========================================================
 
 <br>
@@ -851,7 +900,7 @@ That includes all peaks that didn't survive the grouping step.
 
 
 You would usually use this to check if a peak was actually found but removed by grouping.<br>
-Also contains extra information info for each peak.
+Also contains extra information for each peak.
 <br>
 <br>
 
@@ -872,9 +921,8 @@ kable(peaks[1:5,])
 
 
 
-Checking the results - Isomeric separation
+Checking the results and troubleshooting - Isomeric separation
 ========================================================
-id: check
 
 Check if the individually found peaks (dots) are separated in groups (rectangles) properly.<br>
 The big red dot just marks the spot to asked about.
@@ -896,7 +944,7 @@ analyze.xcms.group(xset_g_r_g_fill,
 
 
 
-Checking the results - Isomeric separation
+Checking the results and troubleshooting - Isomeric separation
 ========================================================
 
 <br><br>
@@ -905,26 +953,16 @@ Checking the results - Isomeric separation
 
 <font style="font-size: 1.5em;"> 
 
-| **Problem**                          | **Solution**                                                |
-|--------------------------------------|-------------------------------------------------------------|
-| Peaks not separated in RT dimension  | Lower bw in the grouping step                               |
-| Peaks split in RT dimension          | Increase bw in the grouping step and/or better alignment    |
-| Peaks not separated in m/z dimension | Lower mzwid in the grouping step                            |
-| Peaks split in m/z dimension         | Increase mzwid in the grouping step and/or better alignment |
-| Peaks missing                        | Check raw peaklist and revise peak-picking                  |
-| Peak found but not assigned to group | Compare raw peaklist to minfrac & minsamp parameters for group |
+| **Problem**                                                  | **Solution**                                                |
+|--------------------------------------------------------------|-------------------------------------------------------------|
+| Peaks not separated in RT dimension                          | Lower bw in the grouping step                               |
+| Peaks split in RT dimension                                  | Increase bw in the grouping step and/or better alignment    |
+| Peaks not separated in m/z dimension&nbsp;&nbsp;&nbsp;&nbsp; | Lower mzwid in the grouping step                            |
+| Peaks split in m/z dimension                                 | Increase mzwid in the grouping step and/or better alignment |
+| Peaks missing                                                | Check raw peaklist and revise peak-picking                  |
+| Peak found but not assigned to group                         | Compare raw peaklist to minfrac & minsamp parameters for group |
 
 </font> 
-
-
-
-Checking the results
-========================================================
-
-* Do you find peaks you know should be there?
-* is peak picking or grouping the problem?
-* bw or mzwid adjustment needed?
-* More features are not always good. Could mean you are splitting features that are really the same
 
 
 
@@ -961,6 +999,7 @@ Here are some examples:
 * metaXCMS `r citep(bib[["Tautenhahn2011"]])`: Finding shared alterations among multiple sample classes
 * IPO  `r citep(bib[["Libiseller2015"]])`: Automatic optimization of XCMS parameters
 * more exist... See `r citep(bib[["Mahieu2016"]])`
+
 
 
 The End
