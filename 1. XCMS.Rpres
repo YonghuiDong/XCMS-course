@@ -59,7 +59,6 @@ type: sub-section
 
 
 
-
 What does the data look like? Why pre-processing?
 ========================================================
 id: why
@@ -73,18 +72,24 @@ type: sub-section
 What does the data look like? Why pre-processing?
 ========================================================
 
-TODO: These slides...
+<div align="center">
+<img src="_images/LCMS.png" height=1300px><br>
+</div>
 
-- 3D to 2D
 
-<br>
-This is what XCMS does:
-- Peak-picking
-- Group peaks across samples (+retention time alignment)
-- Examine raw data for peaks that were not found in all samples
 
-<br>
-Simply to do. Difficult to do well. Impossible to do perfectly.
+What does the data look like? Why pre-processing?
+========================================================
+
+<br><br>
+
+<div align="center">
+<img src="_images/3D_to_2D.png" height=900px><br>
+</div>
+
+<br><br>
+
+<p style="font-size: 1.2em; text-align; center;">Simply to do. Difficult to do well. Impossible to do perfectly.</p>
 
 
 
@@ -94,7 +99,7 @@ type: sub-section
 id: peakpick
 
 <br>
-<p style="font-size: 1.5em;">Is this a peak or just noise?</p>
+<p style="font-size: 1.5em">Is this a peak or just noise?</p>
 
 
 
