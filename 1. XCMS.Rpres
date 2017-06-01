@@ -232,6 +232,7 @@ class: centerpage
 ***
 
 <br>
+
 **massifquant**`r citep(bib[["Conley2014"]])`
 * Developed (among other reasons) to better handle variable mass accuracy and peak shapes
 * Bin-less approach
