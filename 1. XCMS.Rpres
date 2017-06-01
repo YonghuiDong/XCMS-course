@@ -44,7 +44,7 @@ Outline
 ========================================================
 type: sub-section
 
-<div style="font-size: 1.3em; text-align: center;line-height: 150%; padding-top:100px">
+<div style="font-size: 1.3em; text-align: center;line-height: 150%; padding-top:100px; padding-bottom: 180px;">
 <br>
 <ol type="1">
 <li><a href="#/why">What does the data look like?<br>Why pre-processing?</a></li>
@@ -56,6 +56,12 @@ type: sub-section
 <li><a href="#/stats">Getting quick stats</a></li>
 </ol>
 </div>
+
+
+<div align="center">
+<i>This presentation and sample data can be found at <a href="https://github.com/stanstrup/XCMS-course">github.com/stanstrup/XCMS-course</a></i>
+</div>
+
 
 
 
@@ -210,6 +216,8 @@ class: centerpage
 * Usually the best if the data is "nice"
 * Bin-less approach
 
+***
+
 <br>
 **massifquant**  `r citep(bib[["Conley2014"]])`
 * Developed (among other reasons) to better handle variable mass accuracy and peak shape
@@ -267,6 +275,9 @@ Peak picking - Peak width
 ========================================================
 
 Centwave asks you to set the minimum and maxmimum peak widths you have in your data.<br>
+This is used to 
+<br>
+<br>
 You set it in seconds (always seconds in XCMS) and this is what we did before.
 <br>
 
@@ -328,7 +339,9 @@ Peak picking - ppm
 ========================================================
 
 <br>
-ppm == Relative deviation in the *m/z* dimension
+**ppm:** Relative deviation in the *m/z* dimension<br>
+&emsp;&emsp;&nbsp;&nbsp;In the centWave context it is the maximum allowed deviation between scans when locating regions of interest (ROIs).
+
 
 <br>
 Do not trust the vendors number. Like the mileage of a car these numbers are far from true in real world scenarios.<br>
@@ -377,8 +390,6 @@ Check what are actually reasonably sized peaks in the spectrum.
 
 Peak picking - ppm
 ========================================================
-
-TODO: Is ppm calculated from the mean to the edges? So +/-. Or does all scans need to be within the ppm to be included?
 
 <br>
 <div align="center">
