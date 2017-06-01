@@ -1005,6 +1005,13 @@ Checking the results and troubleshooting - Isomeric separation
 Getting quick stats
 ========================================================
 id: stats
+type: sub-section
+
+
+Getting quick stats
+========================================================
+
+<br>
 
 ```{r, cache=TRUE, message = FALSE}
 stats <- diffreport(xset_g_r_g_fill, class1="A", class2="B")
@@ -1012,11 +1019,31 @@ stats <- diffreport(xset_g_r_g_fill, class1="A", class2="B")
 kable(stats[1:10,c("name", "fold", "tstat", "pvalue", "mzmed", "rtmed", "npeaks", "A", "B", "C")])
 ```
 
+<br>
+
+<div class="fragment" data-fragment-index="1">
+
+Be aware that doing the stats directly on the full and unprocessed peak table is rarely a good idea.
+<br><br>
+
+You should normally consider doing things like:
+
+<ul>
+<li>Inter- and intra-batch correction</li>
+<li>Scaling and normalization</li>
+<li>Maybe filter some peaks (known contaminants? not stable in QC samples?)</li>
+<li>Univariate stats above should be corrected for multiple testing</li>
+</ul>
+
+</div>
+
 ***
 
-<div class="fragment" align="center">
+<div class="fragment" align="center" data-fragment-index="0">
 <img src="_images/super_sig_feature.png" height=1100px><br>
 </div>
+
+
 
 
 
