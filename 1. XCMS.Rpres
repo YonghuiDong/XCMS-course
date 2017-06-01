@@ -104,7 +104,7 @@ XCMS
 <br>
 
 * R package
-* First published in 2006 `r citep(bib[["Smith2006"]])` by Colin A. Smith *et al.* at The Scripps Research Institute (Patti Lab).
+* First published in 2006`r citep(bib[["Smith2006"]])` by Colin A. Smith *et al.* at The Scripps Research Institute (Patti Lab).
 * Open source: https://github.com/sneumann/xcms
 * The 'X' in the XCMS denotes that it can be used for an chromatography (**G**C/**L**C)
 * Maintained for many years primarily by Steffen Nuemann and his group
@@ -212,7 +212,7 @@ class: centerpage
 
 <br>
 
-**matchedfilter** `r citep(bib[["Smith2006"]])`
+**matchedfilter**`r citep(bib[["Smith2006"]])`
 * Original algoritm
 * Developed for nominal mass instruments
    * Therefore good for low accuracy data
@@ -222,7 +222,7 @@ class: centerpage
 * Bins data in *m/z* dimension
 
 <br>
-**centWave**  `r citep(bib[["Tautenhahn2008"]])`
+**centWave**`r citep(bib[["Tautenhahn2008"]])`
 * Developed for accurate mass instruments
 * Handles different peak widths better
 * prefilter makes it faster
@@ -232,7 +232,7 @@ class: centerpage
 ***
 
 <br>
-**massifquant**  `r citep(bib[["Conley2014"]])`
+**massifquant**`r citep(bib[["Conley2014"]])`
 * Developed (among other reasons) to better handle variable mass accuracy and peak shapes
 * Bin-less approach
 * No personal experience but from the paper it appears that:
@@ -244,7 +244,7 @@ class: centerpage
 Peak picking - What peak picking does
 ========================================================
 
-Here we will go through peakpicking with the centwave algorithm `r citep(bib[["Tautenhahn2008"]])`.<br>
+Here we will go through peakpicking with the centwave algorithm`r citep(bib[["Tautenhahn2008"]])`.<br>
 
 * First it finds *regions of interest* (ROIs). <br> Those are where there could be a peak: Stable mass for a certain time.
 * Next the peak shape is evaluated.
@@ -1028,12 +1028,12 @@ XCMS based packages
 There are many packages that add additional features to XCMS.<br>
 Here are some examples:
 
-* CAMERA `r citep(bib[["Kuhl2012"]])`: Grouping of features and annotation (next talk!)
-* X<sup>13</sup>CMS `r citep(bib[["Huang2014"]])`: Unbiased mapping of isotopic fates
-* XCMS Online `r citep(bib[["Gowda2014"]])`: Online and interactive use of XCMS
-* metaXCMS `r citep(bib[["Tautenhahn2011"]])`: Finding shared alterations among multiple sample classes
-* IPO  `r citep(bib[["Libiseller2015"]])`: Automatic optimization of XCMS parameters
-* more exist... See `r citep(bib[["Mahieu2016"]])`
+* CAMERA`r citep(bib[["Kuhl2012"]])`: Grouping of features and annotation (next talk!)
+* X<sup>13</sup>CMS`r citep(bib[["Huang2014"]])`: Unbiased mapping of isotopic fates
+* XCMS Online`r citep(bib[["Gowda2014"]])`: Online and interactive use of XCMS
+* metaXCMS`r citep(bib[["Tautenhahn2011"]])`: Finding shared alterations among multiple sample classes
+* IPO`r citep(bib[["Libiseller2015"]])`: Automatic optimization of XCMS parameters
+* more exist... See`r citep(bib[["Mahieu2016"]])`
 
 
 
