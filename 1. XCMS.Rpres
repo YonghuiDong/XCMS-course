@@ -44,7 +44,7 @@ Outline
 ========================================================
 type: sub-section
 
-<div style="font-size: 1.3em; text-align: center;line-height: 150%; padding-top:100px; padding-bottom: 180px;">
+<div style="font-size: 1.3em; text-align: center;line-height: 150%; padding-top:100px; padding-bottom: 140px;">
 <br>
 <ol type="1">
 <li><a href="#/why">What does the data look like?<br>Why pre-processing?</a></li>
@@ -59,9 +59,13 @@ type: sub-section
 
 
 <div align="center">
+<p>
+<i>The data used in this presentation was kindly provided by Drs. Richard and Nichole Reisdorph and their <a href="http://www.ucdenver.edu/academics/colleges/pharmacy/Research/CoreFacilities/Spectrometry/Pages/default.aspx">Mass Spectrometry Laboratory</a></i>
+</p>
+<p>
 <i>This presentation and sample data can be found at <a href="https://github.com/stanstrup/XCMS-course">github.com/stanstrup/XCMS-course</a></i>
+</p>
 </div>
-
 
 
 
